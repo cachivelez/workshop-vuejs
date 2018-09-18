@@ -7,7 +7,9 @@
                         <md-icon class="white-font">menu</md-icon>
                     </md-button>
                     <span class="md-title white-font height30">
-                      <img src="./assets/deloitte.png" alt="logo">
+                      <router-link to="/">
+                        <img src="./assets/deloitte.png" alt="logo">
+                      </router-link>
                     </span>
                 </div>
             </md-app-toolbar>

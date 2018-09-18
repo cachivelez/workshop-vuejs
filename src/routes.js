@@ -8,11 +8,6 @@ const routes = [
       name: 'Home'
     },
     {
-      path: '/Home',
-      component: Home,
-      name: 'Home'
-    },
-    {
       path: '/explorar',
       component: Explore,
       name: 'Explorar'

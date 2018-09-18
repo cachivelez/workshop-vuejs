@@ -26,21 +26,7 @@
           </section>
         </div>
       </section>
-      <md-dialog :md-active.sync="showDialog">
-          <md-dialog-title>{{audio.title}}</md-dialog-title>
-
-          <md-dialog-content>
-            <div v-if="audio.urls">
-              <audio controls>
-                <source :src="audio.urls.high_mp3" type="audio/mpeg"/>
-              </audio>
-            </div>
-          </md-dialog-content>         
-
-          <md-dialog-actions>
-            <md-button class="md-primary" @click="showDialog = false">Cerrar</md-button>
-          </md-dialog-actions>
-      </md-dialog>
+      <Modal :showDialog="showDialog" :audio="audio"></Modal>
   </div>
   
 </template>
@@ -60,10 +46,6 @@
       margin-bottom:20px;
     }    
   }
-  audio{
-      margin-top:60px;
-      width:100%;
-  }
   .md-app-content {
     padding: 0px;
   }
@@ -74,9 +56,15 @@
 </style>
 
 <script>
+
 import Axios from 'axios'
+import Modal from '../components/Modal.vue'
+
 export default {
   name: 'Explore',
+  components: {
+    Modal
+  },
   created(){
     this.getChannels()
   },
@@ -91,14 +79,12 @@ export default {
     getChannels: function(){
       Axios.get('https://api.audioboom.com/channels/recommended').then(response =>{
         this.channels = response.data.body;
-        console.log(response.data.body)
       })
     },
     getAudio: function(id){
       Axios.get('https://api.audioboom.com/audio_clips/' + id + '.mp3').then(response =>{
         this.audio = response.data.body.audio_clip;
-        this.showDialog = true, 
-        console.log(this.audio)
+        this.showDialog = true
       })
     }
   } 
